@@ -1,0 +1,30 @@
+body{
+background: #5f97ad;
+background: linear-gradient(90deg, rgba(95, 151, 173, 1) 0%, rgba(87, 199, 133, 1) 33%, rgba(191, 214, 98, 1) 79%, rgba(237, 221, 83, 1) 100%);
+}
+
+.container{
+    background-color: #fff;
+    width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+input, select, button{
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    display: block;
+}
+button{
+    background-color: #5f97ad;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+button:hover{   
+    background-color: #4a7a8c;
+}
