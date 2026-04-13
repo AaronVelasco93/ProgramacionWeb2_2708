@@ -1,0 +1,20 @@
+.calcula{
+    width: 300px;
+    margin: 50px auto;
+    border: 1px solid #484343;
+    padding: 15px;
+    border-radius: 10px;
+    background-color: #f0f0f0;
+
+}
+input[type="button"]{
+    width: 60px;
+    height: 60px;
+    margin: 5px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    background-color: #d4d4d4;
+    cursor: pointer;    
+
+}
