@@ -1,0 +1,17 @@
+{
+  "name": "node",
+  "version": "1.0.0",
+  "description": "servidor con http",
+  "keywords": [
+    "node",
+    "http",
+    "server"
+  ],
+  "license": "ISC",
+  "author": "AaronVelasco93",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
