@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuarios</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <h1>Usuarios</h1>
+    <!-- Formulario para agreagar un nuevo usuario -->
+    <form action="/add" method="post">
+        <label for="name">Nombre:</label>
+        <input type="text" id="name" name="nombre" required><br><br>
+
+        <label for="email">Correo Electrónico:</label>
+        <input type="email" id="email" name="correo" required><br><br>
+
+        <button type="submit">Agregar</button>
+    </form>
+    <hr>
+    <!-- Tabla para mostrar los usuarios -->
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Correo Electrónico</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <!-- //bucle para mostrar cada usuario en una fila de la tabla con EJS -->
+        <tbody>
+            <% users.forEach(usuario => { %>
+                <tr>
+                    <td><%= usuario.id %></td>
+                    <td><%= usuario.nombre %></td>
+                    <td><%= usuario.correo %></td>
+                    <td>
+                        <a href="/edit/<%= usuario.id %>">Editar</a>
+                        <a href="/delete/<%= usuario.id %>">Eliminar</a>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+
+</body>
+</html>

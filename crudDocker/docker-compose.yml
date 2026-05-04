@@ -1,0 +1,52 @@
+# Version moderna del formato Compose. Define dos servicios: app y base de datos.
+services:
+  # Contenedor de la aplicacion Node.js/Express.
+  app:
+    build: .
+    container_name: crud_app
+    restart: unless-stopped
+    ports:
+      # Puerto local:puerto del contenedor. Abre la app en http://localhost:3005
+      - "3005:3005"
+    environment:
+      # Variables que lee db.js para conectarse al contenedor mysql.
+      PORT: 3005
+      DB_HOST: db
+      DB_USER: crud_user
+      DB_PASSWORD: crud_password
+      DB_NAME: crud_db
+    depends_on:
+      # Espera a que MySQL este saludable antes de iniciar la aplicacion.
+      db:
+        condition: service_healthy
+
+  # Contenedor de MySQL separado de la aplicacion.
+  db:
+    image: mysql:8.4
+    container_name: crud_db
+    restart: unless-stopped
+    environment:
+      # Credenciales iniciales de MySQL. Deben coincidir con las variables de la app.
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: crud_db
+      MYSQL_USER: crud_user
+      MYSQL_PASSWORD: crud_password
+    ports:
+      # Puerto opcional para conectarse desde clientes locales como Workbench o DBeaver.
+      - "3308:3306"
+    volumes:
+      # Guarda los datos aunque se apaguen o reconstruyan los contenedores.
+      - mysql_data:/var/lib/mysql
+      # Ejecuta el script SQL al crear la base por primera vez.
+      - ./files/db.sql:/docker-entrypoint-initdb.d/01-db.sql:ro
+    healthcheck:
+      # Verifica que MySQL ya acepte conexiones antes de que arranque la app.
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "crud_user", "-pcrud_password"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+# Volumen administrado por Docker para persistir la informacion de MySQL.
+volumes:
+  mysql_data:
